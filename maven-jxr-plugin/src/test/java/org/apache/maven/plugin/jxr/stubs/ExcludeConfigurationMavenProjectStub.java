@@ -24,6 +24,7 @@ import org.apache.maven.model.Model;
 import org.apache.maven.model.ReportPlugin;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 
+import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +44,7 @@ public class ExcludeConfigurationMavenProjectStub
 
         try
         {
-            model = pomReader.read( new FileReader( getBasedir() +
-                "/src/test/resources/unit/exclude-configuration/exclude-configuration-plugin-config.xml" ) );
+            model = pomReader.read( new FileReader( getBasedir() + "/" + getPOM() ) );
             setModel( model );
         }
         catch ( Exception ignored )
@@ -60,7 +60,7 @@ public class ExcludeConfigurationMavenProjectStub
 
         String basedir = getBasedir().getAbsolutePath();
         List<String> compileSourceRoots = new ArrayList<>();
-        compileSourceRoots.add( basedir + "/src/test/resources/unit/exclude-configuration/exclude/configuration" );
+        compileSourceRoots.add( basedir + "/exclude/configuration" );
         setCompileSourceRoots( compileSourceRoots );
 
         // set the report plugins
@@ -76,5 +76,15 @@ public class ExcludeConfigurationMavenProjectStub
     public List<ReportPlugin> getReportPlugins()
     {
         return reportPlugins;
+    }
+
+    @Override
+    public File getBasedir() {
+        return new File( super.getBasedir() + "/exclude-configuration" );
+    }
+
+    @Override
+    protected String getPOM() {
+        return "exclude-configuration-plugin-config.xml";
     }
 }

@@ -102,10 +102,10 @@ public class JxrReportTest
 
         //check if there's a link to the javadoc files
         String str = readFile( xrefDir, "def/configuration/AppSample.html" );
-        assertTrue( str.toLowerCase( Locale.US ).contains( "/apidocs/def/configuration/appsample.html\"" ) );
+        assertTrue( str.toLowerCase( Locale.ENGLISH ).contains( "/apidocs/def/configuration/appsample.html\"" ) );
 
         str = readFile( xrefDir, "def/configuration/App.html" );
-        assertTrue( str.toLowerCase( Locale.US ).contains( "/apidocs/def/configuration/app.html\"" ) );
+        assertTrue( str.toLowerCase( Locale.ENGLISH ).contains( "/apidocs/def/configuration/app.html\"" ) );
 
         // check if encoding is UTF-8, the default value
         assertTrue( str.contains( "text/html; charset=UTF-8" ) );
@@ -141,10 +141,10 @@ public class JxrReportTest
 
         //check if there's a link to the javadoc files
         String str = readFile( xrefDir, "def/configuration/AppSample.html" );
-        assertTrue( str.toLowerCase( Locale.US ).contains( "/apidocs/def/configuration/appsample.html\"" ) );
+        assertTrue( str.toLowerCase( Locale.ENGLISH ).contains( "/apidocs/def/configuration/appsample.html\"" ) );
 
         str = readFile( xrefDir, "def/configuration/App.html" );
-        assertTrue( str.toLowerCase( Locale.US ).contains( "/apidocs/def/configuration/app.html\"" ) );
+        assertTrue( str.toLowerCase( Locale.ENGLISH ).contains( "/apidocs/def/configuration/app.html\"" ) );
 
         // check if encoding is UTF-8, the default value
         assertTrue( str.contains( "text/html; charset=UTF-8" ) );
@@ -184,10 +184,10 @@ public class JxrReportTest
 
         //check if there's a link to the javadoc files
         String str = readFile( xrefDir, "def/configuration/AppSample.html" );
-        assertTrue( str.toLowerCase( Locale.US ).contains( "/apidocs/def/configuration/appsample.html\"" ) );
+        assertTrue( str.toLowerCase( Locale.ENGLISH ).contains( "/apidocs/def/configuration/appsample.html\"" ) );
 
         str = readFile( xrefDir, "def/configuration/App.html" );
-        assertTrue( str.toLowerCase( Locale.US ).contains( "/apidocs/def/configuration/app.html\"" ) );
+        assertTrue( str.toLowerCase( Locale.ENGLISH ).contains( "/apidocs/def/configuration/app.html\"" ) );
 
         // check if encoding is UTF-8, the default value
         assertTrue( str.contains( "text/html; charset=UTF-8" ) );
@@ -260,11 +260,11 @@ public class JxrReportTest
 
         //check if there's a link to the javadoc files
         String str = readFile( xrefDir, "nojavadoclink/configuration/AppSample.html" );
-        assertEquals( str.toLowerCase( Locale.US ).indexOf( "/apidocs/nojavadoclink/configuration/appsample.html\"" ),
+        assertEquals( str.toLowerCase( Locale.ENGLISH ).indexOf( "/apidocs/nojavadoclink/configuration/appsample.html\"" ),
                 -1 );
 
         str = readFile( xrefDir, "nojavadoclink/configuration/App.html" );
-        assertEquals( str.toLowerCase( Locale.US ).indexOf( "/apidocs/nojavadoclink/configuration/app.html\"" ), -1 );
+        assertEquals( str.toLowerCase( Locale.ENGLISH ).indexOf( "/apidocs/nojavadoclink/configuration/app.html\"" ), -1 );
 
         str = readFile( xrefDir, "nojavadoclink/configuration/sample/Sample.html" );
         assertEquals( str.toLowerCase().indexOf( "/apidocs/nojavadoclink/configuration/sample/sample.html\"" ), -1 );
@@ -312,10 +312,10 @@ public class JxrReportTest
 
         //check if there's a link to the javadoc files
         String str = readFile( xrefDir, "nojavadocdir/test/AppSample.html" );
-        assertTrue( str.toLowerCase( Locale.US ).contains( "/apidocs/nojavadocdir/test/appsample.html" ) );
+        assertTrue( str.toLowerCase( Locale.ENGLISH ).contains( "/apidocs/nojavadocdir/test/appsample.html" ) );
 
         str = readFile( xrefDir, "nojavadocdir/test/App.html" );
-        assertTrue( str.toLowerCase( Locale.US ).contains( "/apidocs/nojavadocdir/test/app.html" ) );
+        assertTrue( str.toLowerCase( Locale.ENGLISH ).contains( "/apidocs/nojavadocdir/test/app.html" ) );
     }
 
     /**

@@ -24,6 +24,7 @@ import org.apache.maven.model.Model;
 import org.apache.maven.model.ReportPlugin;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 
+import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +44,7 @@ public class IncludeConfigurationMavenProjectStub
 
         try
         {
-            model = pomReader.read( new FileReader( getBasedir() +
-                "/src/test/resources/unit/include-configuration/include-configuration-plugin-config.xml" ) );
+            model = pomReader.read( new FileReader( getBasedir() + "/" + getPOM() ) );
             setModel( model );
         }
         catch ( Exception ignored )
@@ -61,7 +61,7 @@ public class IncludeConfigurationMavenProjectStub
         String basedir = getBasedir().getAbsolutePath();
         List<String> compileSourceRoots = new ArrayList<>();
         compileSourceRoots.add(
-            basedir + "/src/test/resources/unit/include-configuration/include/configuration" );
+            basedir + "/include/configuration" );
         setCompileSourceRoots( compileSourceRoots );
 
         // set the report plugins
@@ -77,5 +77,15 @@ public class IncludeConfigurationMavenProjectStub
     public List<ReportPlugin> getReportPlugins()
     {
         return reportPlugins;
+    }
+
+    @Override
+    public File getBasedir() {
+        return new File( super.getBasedir() + "/include-configuration" );
+    }
+
+    @Override
+    protected String getPOM() {
+        return "include-configuration-plugin-config.xml";
     }
 }

@@ -51,7 +51,6 @@ under the License.
             <project implementation="org.apache.maven.plugin.jxr.stubs.AggregateSubmodule1MavenProjectStub"/>
             <project implementation="org.apache.maven.plugin.jxr.stubs.AggregateSubmodule2MavenProjectStub"/>
           </reactorProjects>
-          <localRepository>${localRepository}</localRepository>
         </configuration>
       </plugin>
     </plugins>

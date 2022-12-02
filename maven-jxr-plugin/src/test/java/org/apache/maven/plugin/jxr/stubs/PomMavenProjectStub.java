@@ -27,13 +27,12 @@ import java.util.List;
 import org.apache.maven.model.Build;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.apache.maven.plugin.testing.stubs.MavenProjectStub;
 
 /**
  * @author <a href="mailto:vincent.siveton@gmail.com">Vincent Siveton</a>
  */
 public class PomMavenProjectStub
-    extends MavenProjectStub
+    extends JxrProjectStub
 {
     private Build build;
 
@@ -44,7 +43,7 @@ public class PomMavenProjectStub
 
         try
         {
-            model = pomReader.read( new FileReader( new File( getBasedir(), "pom-test-plugin-config.xml" ) ) );
+            model = pomReader.read( new FileReader( new File( getBasedir() + "/" + getPOM() ) ) );
             setModel( model );
         }
         catch ( Exception e )
@@ -61,11 +60,11 @@ public class PomMavenProjectStub
 
         Build build = new Build();
         build.setFinalName( model.getArtifactId() );
-        build.setDirectory( super.getBasedir() + "/target/test/unit/pom-test/target" );
+        build.setDirectory( getBasedir() + "/target" );
         build.setSourceDirectory( getBasedir() + "/src/main/java" );
-        build.setOutputDirectory( super.getBasedir() + "/target/test/unit/pom-test/target/classes" );
+        build.setOutputDirectory( getBasedir() + "/target/classes" );
         build.setTestSourceDirectory( getBasedir() + "/src/test/java" );
-        build.setTestOutputDirectory( super.getBasedir() + "/target/test/unit/pom-test/target/test-classes" );
+        build.setTestOutputDirectory( getBasedir() + "/target/test-classes" );
         setBuild( build );
 
         List<String> compileSourceRoots = new ArrayList<>();
@@ -93,11 +92,13 @@ public class PomMavenProjectStub
         this.build = build;
     }
 
-    /**
-     * @see org.apache.maven.plugin.testing.stubs.MavenProjectStub#getBasedir()
-     */
-    public File getBasedir()
-    {
-        return new File( super.getBasedir() + "/src/test/resources/unit/pom-test" );
+    @Override
+    public File getBasedir() {
+        return new File( super.getBasedir() + "/pom-test" );
+    }
+
+    @Override
+    protected String getPOM() {
+        return "pom-test-plugin-config.xml";
     }
 }

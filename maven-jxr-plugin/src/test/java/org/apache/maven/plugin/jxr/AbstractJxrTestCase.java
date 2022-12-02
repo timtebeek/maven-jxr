@@ -22,6 +22,8 @@ package org.apache.maven.plugin.jxr;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Collections;
+import java.util.List;
 
 import org.apache.maven.plugin.LegacySupport;
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
@@ -125,8 +127,13 @@ public abstract class AbstractJxrTestCase
             (DefaultRepositorySystemSession) legacySupport.getRepositorySession();
         repoSession.setLocalRepositoryManager( new SimpleLocalRepositoryManagerFactory().newInstance( repoSession, new LocalRepository( artifactStubFactory.getWorkingDir() ) ) );
 
+        List<MavenProject> reactorProjects = mojo.getReactorProjects() != null ? mojo.getReactorProjects() : Collections.emptyList();
+
         setVariableValueToObject( mojo, "session", legacySupport.getSession() );
-        setVariableValueToObject( mojo, "remoteRepositories", mojo.getProject().getRemoteArtifactRepositories() );
+        setVariableValueToObject( mojo, "repoSession", legacySupport.getRepositorySession() );
+        setVariableValueToObject( mojo, "reactorProjects", reactorProjects );
+        setVariableValueToObject( mojo, "remoteProjectRepositories", mojo.getProject().getRemoteProjectRepositories() );
+        setVariableValueToObject( mojo, "siteDirectory", new File( mojo.getProject().getBasedir(), "src/site" ) );
         return mojo;
     }
 

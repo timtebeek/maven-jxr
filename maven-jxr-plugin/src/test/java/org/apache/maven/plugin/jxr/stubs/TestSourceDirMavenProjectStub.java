@@ -23,6 +23,7 @@ import org.apache.maven.artifact.Artifact;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 
+import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class TestSourceDirMavenProjectStub
         try
         {
             model = pomReader.read( new FileReader(
-                getBasedir() + "/src/test/resources/unit/testsourcedir-test/testsourcedir-test-plugin-config.xml" ) );
+                getBasedir() + "/" + getPOM() ) );
             setModel( model );
         }
         catch ( Exception ignored )
@@ -58,13 +59,22 @@ public class TestSourceDirMavenProjectStub
 
         String basedir = getBasedir().getAbsolutePath();
         List<String> compileSourceRoots = new ArrayList<>();
-        compileSourceRoots.add( basedir + "/src/test/resources/unit/testsourcedir-test" );
+        compileSourceRoots.add( basedir );
         setCompileSourceRoots( compileSourceRoots );
 
         Artifact artifact = new JxrPluginArtifactStub( getGroupId(), getArtifactId(), getVersion(), getPackaging() );
         artifact.setArtifactHandler( new DefaultArtifactHandlerStub() );
         setArtifact( artifact );
+    }
 
+    @Override
+    public File getBasedir() {
+        return new File( super.getBasedir() + "/testsourcedir-test" );
+    }
+
+    @Override
+    protected String getPOM() {
+        return "testsourcedir-test-plugin-config.xml";
     }
 
 }

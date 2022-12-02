@@ -23,8 +23,8 @@ import org.apache.maven.artifact.Artifact;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.ReportPlugin;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.apache.maven.plugin.testing.stubs.MavenProjectStub;
 
+import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +45,7 @@ public class NoJavadocDirMavenProjectStub
         try
         {
             model = pomReader.read( new FileReader(
-                getBasedir() + "/src/test/resources/unit/nojavadocdir-test/nojavadocdir-test-plugin-config.xml" ) );
+                getBasedir() + "/" + getPOM() ) );
             setModel( model );
         }
         catch ( Exception ignored )
@@ -61,7 +61,7 @@ public class NoJavadocDirMavenProjectStub
 
         String basedir = getBasedir().getAbsolutePath();
         List<String> compileSourceRoots = new ArrayList<>();
-        compileSourceRoots.add( basedir + "/src/test/resources/unit/nojavadocdir-test/nojavadocdir/test" );
+        compileSourceRoots.add( basedir + "/nojavadocdir/test" );
         setCompileSourceRoots( compileSourceRoots );
 
         //set the report plugins
@@ -76,5 +76,15 @@ public class NoJavadocDirMavenProjectStub
     public List<ReportPlugin> getReportPlugins()
     {
         return reportPlugins;
+    }
+
+    @Override
+    public File getBasedir() {
+        return new File( super.getBasedir() + "/nojavadocdir-test" );
+    }
+
+    @Override
+    protected String getPOM() {
+        return "nojavadocdir-test-plugin-config.xml";
     }
 }

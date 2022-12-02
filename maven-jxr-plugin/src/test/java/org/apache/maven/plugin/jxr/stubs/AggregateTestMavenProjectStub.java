@@ -25,6 +25,7 @@ import org.apache.maven.model.ReportPlugin;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.maven.plugin.testing.stubs.MavenProjectStub;
 
+import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ import java.util.List;
  * @author <a href="mailto:oching@apache.org">Maria Odea Ching</a>
  */
 public class AggregateTestMavenProjectStub
-    extends MavenProjectStub
+    extends JxrProjectStub
 {
     private List<ReportPlugin> reportPlugins = new ArrayList<>();
 
@@ -45,7 +46,7 @@ public class AggregateTestMavenProjectStub
         try
         {
             model = pomReader.read( new FileReader(
-                getBasedir() + "/src/test/resources/unit/aggregate-test/aggregate-test-plugin-config.xml" ) );
+                getBasedir() + "/" + getPOM() ) );
             setModel( model );
         }
         catch ( Exception ignored )
@@ -61,7 +62,7 @@ public class AggregateTestMavenProjectStub
 
         String basedir = getBasedir().getAbsolutePath();
         List<String> compileSourceRoots = new ArrayList<>();
-        compileSourceRoots.add( basedir + "/src/test/resources/unit/aggregate-test/aggregate/test" );
+        compileSourceRoots.add( basedir + "/aggregate/test" );
         setCompileSourceRoots( compileSourceRoots );
 
         //set the report plugins
@@ -77,5 +78,15 @@ public class AggregateTestMavenProjectStub
     public List<ReportPlugin> getReportPlugins()
     {
         return reportPlugins;
+    }
+
+    @Override
+    public File getBasedir() {
+        return new File( super.getBasedir() + "/aggregate-test" );
+    }
+
+    @Override
+    protected String getPOM() {
+        return "aggregate-test-plugin-config.xml";
     }
 }

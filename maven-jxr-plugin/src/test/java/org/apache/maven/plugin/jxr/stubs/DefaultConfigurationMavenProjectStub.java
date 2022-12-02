@@ -23,8 +23,8 @@ import org.apache.maven.artifact.Artifact;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.ReportPlugin;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.apache.maven.plugin.testing.stubs.MavenProjectStub;
 
+import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ import java.util.List;
  * @author <a href="mailto:oching@apache.org">Maria Odea Ching</a>
  */
 public class DefaultConfigurationMavenProjectStub
-    extends MavenProjectStub
+    extends JxrProjectStub
 {
     private List<ReportPlugin> reportPlugins = new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class DefaultConfigurationMavenProjectStub
         try
         {
             model = pomReader.read( new FileReader( getBasedir() +
-                "/src/test/resources/unit/default-configuration/default-configuration-plugin-config.xml" ) );
+                "/" + getPOM() ) );
             setModel( model );
         }
         catch ( Exception ignored )
@@ -61,7 +61,7 @@ public class DefaultConfigurationMavenProjectStub
 
         String basedir = getBasedir().getAbsolutePath();
         List<String> compileSourceRoots = new ArrayList<>();
-        compileSourceRoots.add( basedir + "/src/test/resources/unit/default-configuration/def/configuration" );
+        compileSourceRoots.add( basedir + "/def/configuration" );
         setCompileSourceRoots( compileSourceRoots );
 
         //set the report plugins
@@ -79,4 +79,13 @@ public class DefaultConfigurationMavenProjectStub
         return reportPlugins;
     }
 
+    @Override
+    public File getBasedir() {
+        return new File( super.getBasedir() + "/default-configuration" );
+    }
+
+    @Override
+    protected String getPOM() {
+        return "default-configuration-plugin-config.xml";
+    }
 }

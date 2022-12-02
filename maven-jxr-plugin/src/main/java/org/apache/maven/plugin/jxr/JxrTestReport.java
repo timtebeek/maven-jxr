@@ -65,14 +65,14 @@ public class JxrTestReport
     {
         List<String> l = new ArrayList<>();
 
-        if ( !"pom".equals( getProject().getPackaging().toLowerCase( Locale.US ) ) )
+        if ( !"pom".equals( getProject().getPackaging().toLowerCase( Locale.ENGLISH ) ) )
         {
             l.addAll( sourceDirs );
         }
 
         if ( getProject().getExecutionProject() != null )
         {
-            if ( !"pom".equals( getProject().getExecutionProject().getPackaging().toLowerCase( Locale.US ) ) )
+            if ( !"pom".equals( getProject().getExecutionProject().getPackaging().toLowerCase( Locale.ENGLISH ) ) )
             {
                 l.addAll( getProject().getExecutionProject().getTestCompileSourceRoots() );
             }
@@ -88,7 +88,7 @@ public class JxrTestReport
 
         if ( project.getExecutionProject() != null )
         {
-            if ( !"pom".equals( project.getExecutionProject().getPackaging().toLowerCase( Locale.US ) ) )
+            if ( !"pom".equals( project.getExecutionProject().getPackaging().toLowerCase( Locale.ENGLISH ) ) )
             {
                 l.addAll( project.getExecutionProject().getTestCompileSourceRoots() );
             }

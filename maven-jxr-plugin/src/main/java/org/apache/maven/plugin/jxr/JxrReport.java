@@ -87,14 +87,14 @@ public class JxrReport
 
         List<String> l = new ArrayList<>();
 
-        if ( !"pom".equals( getProject().getPackaging().toLowerCase( Locale.US ) ) )
+        if ( !"pom".equals( getProject().getPackaging().toLowerCase( Locale.ENGLISH ) ) )
         {
             l.addAll( sourceDirs );
         }
 
         if ( getProject().getExecutionProject() != null )
         {
-            if ( !"pom".equals( getProject().getExecutionProject().getPackaging().toLowerCase( Locale.US ) ) )
+            if ( !"pom".equals( getProject().getExecutionProject().getPackaging().toLowerCase( Locale.ENGLISH ) ) )
             {
                 l.addAll( getProject().getExecutionProject().getCompileSourceRoots() );
             }
@@ -108,14 +108,14 @@ public class JxrReport
     {
         List<String> l = new ArrayList<>();
 
-        if ( !"pom".equals( project.getPackaging().toLowerCase( Locale.US ) ) )
+        if ( !"pom".equals( project.getPackaging().toLowerCase( Locale.ENGLISH ) ) )
         {
             l.addAll( project.getCompileSourceRoots() );
         }
 
         if ( project.getExecutionProject() != null )
         {
-            if ( !"pom".equals( project.getExecutionProject().getPackaging().toLowerCase( Locale.US ) ) )
+            if ( !"pom".equals( project.getExecutionProject().getPackaging().toLowerCase( Locale.ENGLISH ) ) )
             {
                 l.addAll( project.getExecutionProject().getCompileSourceRoots() );
             }

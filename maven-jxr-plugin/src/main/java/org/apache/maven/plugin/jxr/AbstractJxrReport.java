@@ -76,7 +76,7 @@ public abstract class AbstractJxrReport
     /**
      * String used at the bottom of the Xref HTML files.
      */
-    @Parameter( property = "bottom", defaultValue = "Copyright &#169; {inceptionYear}&#x2013;{currentYear} {organizationName}. All rights reserved." )
+    @Parameter( property = "bottom", defaultValue = "&#169; {inceptionYear}&#x2013;{currentYear} {organizationName}" )
     private String bottom;
 
     // CHECKSTYLE_ON: LineLength
@@ -110,12 +110,6 @@ public abstract class AbstractJxrReport
      */
     @Parameter
     private ArrayList<String> includes;
-
-    /**
-     * The projects in the reactor for aggregation report.
-     */
-    @Parameter( defaultValue = "${reactorProjects}", readonly = true )
-    protected List<MavenProject> reactorProjects;
 
     /**
      * Whether to skip this execution.
@@ -418,13 +412,14 @@ public abstract class AbstractJxrReport
         return project;
     }
 
-    /**
-     * Returns the Maven session.
-     * @return Maven session
-     */
     protected MavenSession getSession()
     {
         return session;
+    }
+
+    protected List<MavenProject> getReactorProjects()
+    {
+        return reactorProjects;
     }
 
     /**

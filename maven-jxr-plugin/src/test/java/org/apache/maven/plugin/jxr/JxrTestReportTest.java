@@ -20,8 +20,6 @@ package org.apache.maven.plugin.jxr;
  */
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 
 /**
  * @author <a href="mailto:oching@apache.org">Maria Odea Ching</a>
